@@ -1,0 +1,153 @@
+{
+  "entities": {
+    "Citizen": {
+      "title": "Citizen",
+      "description": "Information about a citizen in the locality.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fullName": { "type": "string" },
+        "dob": { "type": "string" },
+        "gender": { "type": "string", "enum": ["Nam", "Nữ", "Khác"] },
+        "phone": { "type": "string" },
+        "occupation": { "type": "string" },
+        "householdId": { "type": "string" },
+        "isHouseholder": { "type": "boolean" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "fullName", "dob", "gender", "phone", "occupation", "householdId", "isHouseholder"]
+    },
+    "Household": {
+      "title": "Household",
+      "description": "Information about a household.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "householderName": { "type": "string" },
+        "address": { "type": "string" },
+        "memberCount": { "type": "number" },
+        "phone": { "type": "string" },
+        "status": { "type": "string", "enum": ["Thường", "Cận nghèo", "Nghèo"] },
+        "landArea": { "type": "number" }
+      },
+      "required": ["id", "householderName", "address", "memberCount", "phone", "status", "landArea"]
+    },
+    "LandPlot": {
+      "title": "LandPlot",
+      "description": "Information about agricultural land plots.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "householdId": { "type": "string" },
+        "type": { "type": "string", "enum": ["Trồng lúa", "Trồng cây ăn quả", "Nuôi trồng thủy sản", "Chăn nuôi"] },
+        "area": { "type": "number" },
+        "location": { "type": "string" },
+        "currentCrop": { "type": "string" }
+      },
+      "required": ["id", "householdId", "type", "area", "location", "currentCrop"]
+    },
+    "FarmingLog": {
+      "title": "FarmingLog",
+      "description": "Information about agricultural logs.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "landPlotId": { "type": "string" },
+        "activity": { "type": "string" },
+        "date": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "landPlotId", "activity", "date", "notes"]
+    },
+    "LocalPlan": {
+      "title": "LocalPlan",
+      "description": "Locality plan details.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "objective": { "type": "string" },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "assignee": { "type": "string" },
+        "status": { "type": "string", "enum": ["Chưa bắt đầu", "Đang thực hiện", "Đã hoàn thành"] }
+      },
+      "required": ["id", "title", "objective", "startDate", "endDate", "assignee", "status"]
+    },
+    "HandbookArticle": {
+      "title": "HandbookArticle",
+      "description": "Locality handbook handbook articles.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string", "enum": ["Trồng trọt", "Chăn nuôi", "Chính sách", "Khác"] },
+        "content": { "type": "string" },
+        "author": { "type": "string" },
+        "date": { "type": "string" }
+      },
+      "required": ["id", "title", "category", "content", "author", "date"]
+    },
+    "UserAccount": {
+      "title": "UserAccount",
+      "description": "Accounts allowed to log in.",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "fullName": { "type": "string" },
+        "role": { "type": "string", "enum": ["Cán bộ chính quy", "Cán bộ nông nghiệp", "Cộng tác viên", "Quản trị viên"] },
+        "phone": { "type": "string" },
+        "password": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["username", "fullName", "role", "createdAt"]
+    },
+    "SystemLog": {
+      "title": "SystemLog",
+      "description": "System audit logs.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "username": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" }
+      },
+      "required": ["id", "timestamp", "username", "action", "details"]
+    }
+  },
+  "firestore": {
+    "/citizens/{citizenId}": {
+      "schema": "Citizen",
+      "description": "Collection of citizens."
+    },
+    "/households/{householdId}": {
+      "schema": "Household",
+      "description": "Collection of households."
+    },
+    "/plots/{plotId}": {
+      "schema": "LandPlot",
+      "description": "Collection of land plots."
+    },
+    "/farming_logs/{logId}": {
+      "schema": "FarmingLog",
+      "description": "Collection of farming logs."
+    },
+    "/plans/{planId}": {
+      "schema": "LocalPlan",
+      "description": "Collection of local plans."
+    },
+    "/articles/{articleId}": {
+      "schema": "HandbookArticle",
+      "description": "Collection of handbook articles."
+    },
+    "/accounts/{username}": {
+      "schema": "UserAccount",
+      "description": "Collection of user accounts."
+    },
+    "/system_logs/{logId}": {
+      "schema": "SystemLog",
+      "description": "Collection of system logs."
+    }
+  }
+}

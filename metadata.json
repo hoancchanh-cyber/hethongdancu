@@ -1,0 +1,6 @@
+{
+  "name": "Hệ thống Quản lý Dân cư và Nông nghiệp",
+  "description": "Hệ thống số hóa quản lý thông tin Công dân, Hộ dân, Nông nghiệp, Kế hoạch, Sổ tay hướng dẫn và Báo cáo thống kê dành cho chính quyền địa phương.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
